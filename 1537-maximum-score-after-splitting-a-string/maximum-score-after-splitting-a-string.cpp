@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int countOccurence(char x,string s)
+    {
+        int count=0;
+        for(char ch: s)
+        {
+            if(ch==x)
+            {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+    int maxScore(string s) {
+        int max=INT_MIN;
+        for(int x=0 ; x<s.length()-1;x++)
+        {
+            string left=s.substr(0,x+1);
+            cout<<left<<" ";
+            string right=s.substr(x+1,s.length()-(x+1));
+            cout<<right<<endl;
+            int sum=(countOccurence('0',left)+countOccurence('1',right));
+            if(sum > max)
+            {
+                max=sum;
+            }
+        }
+
+        return max;
+    }
+};
