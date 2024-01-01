@@ -25,13 +25,6 @@ public:
             sum -= nums[p1];
             p1++;
 
-            if (p1 > p2) {
-                // Ensure p2 is not behind p1
-                p2 = p1;
-                if (p2 < len) {
-                    sum += nums[p2];
-                }
-            }
         } else {
             p2++;
             if (p2 < len) {
