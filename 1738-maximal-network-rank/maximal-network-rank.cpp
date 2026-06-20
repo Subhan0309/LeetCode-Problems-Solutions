@@ -2,22 +2,20 @@ class Solution {
 public:
     int maximalNetworkRank(int n, vector<vector<int>>& roads) {
 
-        map<vector<int>, bool> container;
+        vector<vector<bool>> connected(n, vector<bool>(n, false));
         vector<int> degrees(n,0);
-        // storing edges presence in hash for faster lookup
+
         for(const auto& road: roads){
-            container[road] = true;
-        }
+            int node1 = road[0];
+            int node2 = road[1];
 
-        // calculating the degree for every node
-        for(int i = 0 ; i < n ; i++){
-            for(int j = 0 ; j < n ; j++){
+            degrees[node1]++;
+            degrees[node2]++;
 
-                if(container[{i,j}] || container[{j,i}]){
-                    degrees[i]++;
-                }
+            connected[node1][node2]=true;
+            connected[node2][node1]=true;
 
-            }
+
         }
 
         // while calculating maximum , we see degrees & presence of edge 
@@ -32,7 +30,7 @@ public:
         for(int i = 0 ; i < n ; i++){
             for(int j = i+1 ; j < n ; j++){
                 int sumHolder = degrees[i] + degrees[j];
-                if(container[{i,j}] || container[{j,i}]){
+                if(connected[i][j]){
                     sumHolder -= 1;
                 }
 
